@@ -6,6 +6,7 @@ services:
     image: confluentinc/cp-kafka:7.5.1
     hostname: broker-2
     container_name: broker-2
+    restart: always
     volumes:
       -  ./kafka_data:/var/lib/kafka/data
     ports:
@@ -39,9 +40,9 @@ services:
     container_name: connect-2
     volumes:
       - ./etc/jars:/etc/kafka-connect/jars
+    restart: always
     depends_on:
       - broker-2
-      - schema-registry
     ports:
       - "8083:8083"
     environment:
